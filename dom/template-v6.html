@@ -1,0 +1,35 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+
+
+<div id="app">
+    <input type="text" v-on:input="alterarTitulo">
+    //para se atualizar somente uma vez
+    <p v-once>{{ titulo }}</p>
+    <p>{{ saudacao() }}</p>
+    <a v-bind:href="link">Google</a>
+    <hr>
+    <a v-bind:href=" linkHtml "></a>
+    
+</div>
+<script>
+    //Vue é o meio campo entre o template e a web
+
+    
+    new Vue({
+        //referencia o ID
+        el: '#app',   
+        //apartir do el conseguimos referenciar td que está dentro da div
+        data: {
+            titulo: 'Usando VueJS!',
+            link: 'http://google.com.br',
+            linkHtml: '<a href="http://google.com">Google</a>'
+        },
+        methods: {
+            // quando a funcao é chamada precisa se passar o () dentro do html
+            saudacao: function() {
+                this.titulo = 'bom dia!!!!'
+                return this.titulo
+            }
+        }
+    })
+</script>
