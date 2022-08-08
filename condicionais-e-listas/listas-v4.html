@@ -12,14 +12,15 @@
     </template>
     <hr>
     <ul>
-        <!-- o '.' dentro serve para acessar determinado campo dentro do atributo passado;
-             Dentro do  v-for, passamos todos os paramentros que queremos acessar do array;-->
         <li v-for="pessoa in pessoas"> 
             <div v-for="(valor, chave, index) in pessoa">
                 {{ chave }} = {{ valor }} ({{ index + 1 }})
             </div>
         </li>
     </ul>
+    <hr>
+    <!-- Iterando em uma lista de numeros -->
+    <div v-for="n in 10"> {{ n }} </div>
 </div>
 
 

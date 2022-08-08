@@ -3,23 +3,28 @@
 
 <div id="app">
     <ul>
-        <!-- Acessando o Indice atual -->
-        <li v-for="(cor, i) in cores">{{ i + 1}} {{ cor }}</li>
+    <!-- a KEY serve para o Vue como uma dica para identificar onde está a identidade 
+        de cada elemento dentro de uma lista gerada (Dica: utiliza o ID de cada item) -->
+        <li v-for="(cor, i) in cores"v 
+        :key="cor">{{ i + 1}} {{ cor }}</li>
     </ul> 
+    <button @click="cores.push('')"> adicionar </button>
+    <hr>
     <template v-for="(cor, i ) in cores">
         <h1>{{ cor }}</h1>
         <p>{{ i }}</p>
     </template>
     <hr>
     <ul>
-        <!-- o '.' dentro serve para acessar determinado campo dentro do atributo passado;
-             Dentro do  v-for, passamos todos os paramentros que queremos acessar do array;-->
         <li v-for="pessoa in pessoas"> 
             <div v-for="(valor, chave, index) in pessoa">
                 {{ chave }} = {{ valor }} ({{ index + 1 }})
             </div>
         </li>
     </ul>
+    <hr>
+    <!-- Iterando em uma lista de numeros -->
+    <div v-for="n in 10"> {{ n }} </div>
 </div>
 
 
