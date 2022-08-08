@@ -1,0 +1,30 @@
+<meta charset="UTF-8">
+<Script src="https://unpkg.com/vue@2"></Script>
+
+<div id="app">
+    <ul>
+        <!-- Acessando o Indice atual -->
+        <li v-for="(cor, i) in cores">{{ i + 1}} {{ cor }}</li>
+    </ul> 
+    <template v-for="(cor, i ) in cores">
+        <h1>{{ cor }}</h1>
+        <p>{{ i }}</p>
+    </template>
+</div>
+
+
+<script>
+    new Vue({
+        el:'#app',
+        data: {
+           cores: ['vermelho', 'verde', 'amarelo', 'azul'],
+           pessoas: [
+            {nome: 'ana', idade:26, peso:59},
+            {nome: 'higor', idade:21, peso:78},
+           ]
+        }
+
+
+
+    })
+</script>

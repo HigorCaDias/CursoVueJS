@@ -1,0 +1,27 @@
+<meta charset="UTF-8">
+<Script src="https://unpkg.com/vue@2"></Script>
+
+<div id="app">
+       <!-- Aplicando condição IF para toda a div dentro do
+         Podemos utilizar template no lugar de div;
+          -->
+    <!-- Condição para Botao sendo um iF -->
+    <p v-if="logado">Usuário logado: {{ nome }}</p>
+    <p>Nenhum Usuario Logado</p>
+    <button @click ="logado = !logado">
+        {{ logado ? 'Sair' : 'Entrar' }}</button>
+</div>
+
+
+<script>
+    new Vue({
+        el:'#app',
+        data: {
+            nome: 'Maria',
+            logado: false
+        }
+
+
+
+    })
+</script>

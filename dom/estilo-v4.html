@@ -1,6 +1,6 @@
 <script src="https://unpkg.com/vue"></script>
 <style>
-    #app {
+    .caixas {
         display: flex;
         justify-content: space-around;
     }
@@ -22,27 +22,36 @@
     .c3 {
         background-color: blue;
     }
+
+    .girar {
+        transform: rotate(45deg);
+    }
 </style>
 
 <div id="app">
-    <div class="demo" :class="estilo1"
-        @click="aplicarC1 = !aplicarC1"></div>
-    <div class="demo"></div>
-    <div class="demo"></div>
+    <div class="caixas">
+        <div class="demo" :style="{backgroundColor: cor}"></div>
+        <div class="demo" :style="[meuEstilo, {height: altura}]"></div>
+        <div class="demo"></div>
+    </div>
+    <hr>
+    <input type="text" v-model="cor">
+    <input type="text" v-model="largura">
 </div>
 
 <script>
     new Vue({
         el: '#app',
         data: {
-            aplicarC1: false
+            cor: 'red',
+            largura: 100,
+            altura: 20
         },
         computed: {
-            //alterando cores dentro de uma view
-            estilo1() {
+            meuEstilo() {
                 return {
-                    c1: this.aplicarC1,
-                    c2: !this.aplicarC1,
+                    backgroundColor: this.cor,
+                    width: this.largura + 'px'
                 }
             }
         }

@@ -1,6 +1,6 @@
 <script src="https://unpkg.com/vue"></script>
 <style>
-    #app {
+    .caixas {
         display: flex;
         justify-content: space-around;
     }
@@ -22,23 +22,33 @@
     .c3 {
         background-color: blue;
     }
+
+    .girar {
+        transform: rotate(45deg);
+    }
 </style>
 
 <div id="app">
-    <div class="demo" :class="estilo1"
-        @click="aplicarC1 = !aplicarC1"></div>
-    <div class="demo"></div>
-    <div class="demo"></div>
+    <div class="caixas">
+        <div class="demo" :class="estilo1"
+            @click="aplicarC1 = !aplicarC1"></div>
+        <div class="demo" :class="estilo1"></div>
+        <div class="demo"
+            :class="[classeCSS, {girar: aplicarGirar}]"></div>
+    </div>
+    <hr>
+    <input type="text" v-model="classeCSS">
 </div>
 
 <script>
     new Vue({
         el: '#app',
         data: {
-            aplicarC1: false
+            aplicarC1: false,
+            classeCSS: 'c1',
+            aplicarGirar: true
         },
         computed: {
-            //alterando cores dentro de uma view
             estilo1() {
                 return {
                     c1: this.aplicarC1,
