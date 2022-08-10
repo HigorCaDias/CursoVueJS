@@ -1,0 +1,47 @@
+<meta charset="UTF-8">
+
+<div id="app">
+    {{ nome}}
+    {{ sobrenome }}
+    {{ 1 + 1 }}
+
+
+</div>
+
+<script>
+    function MeuVue(params){
+        this.$el =  document.querySelector(params.el)
+        this.$data = params.data
+
+        for(let atr in this.$data){
+            Object.defineProperty(this, atr, {
+                get: () =>{
+                    return this.$data[atr]
+                },
+                set: value =>{
+                    // quando temos o metodo GET e o metodo SET (Principalemnte no SET)quando existe uma alteração no valor
+                    // Conseguimos interceptaala o momento que foi alterada (antes e depois)
+                    this.data[atr] = value
+                }
+            })
+        }
+        //interpolar 
+        const regex = /\{\{([\s\w+]*)\}\}/g
+        this.$el.innerHTML = this.$el.innerHTML.replace(regex, (match, $1) =>{
+            const value = this[$1.trim()]
+            return value ? value : eval($1)
+        })
+    }
+         const vm = new MeuVue({
+            el:'#app',
+            data:{
+                nome:'Maria',
+                sobrenome:'Silva'
+            },
+    
+            
+            
+        })
+        // Uma vez q
+        console.log(vm.nome)
+</script>

@@ -1,48 +1,62 @@
 new Vue({
     el: '#app',
-    data:{
+    data: {
         running: false,
-        playerlife: 100,
-        monsterlife: 100,
+        playerLife: 100,
+        monsterLife: 100,
+        logs: []
     },
     computed: {
-        hasResult(){
-            return this.playerlife == 0 || this.monsterlife == 0
+        hasResult() {
+            return this.playerLife == 0 || this.monsterLife == 0
         }
     },
-    methods:{
-        startGame(){
-            // começando o jogo
+    methods: {
+          // começando o jogo
+        startGame() {
             this.running = true
-            this.playerlife = 100
-            TouchList.monsterlife = 100
+            this.playerLife = 100
+            this.monsterLife = 100
+            this.logs = []
         },
-        attack(especial){
-            // dentro do Vue para uma Função chamar outra função utilizamos o metodo This
-          this.hurt('monsterlife', 5, 10, especial)
-          this.hurt('playerlife', 7, 12, false)
+          // dentro do Vue para uma Função chamar outra função utilizamos o metodo This
+        attack(especial) {
+            this.hurt('monsterLife', 5, 10, especial, 'Jogador', 'Monstro', 'player')
+            if(this.monsterLife > 0) {
+                this.hurt('playerLife', 7, 12, false, 'Monstro', 'Jogador', 'monster')
+            }
         },
-        // Função de calculo do ataque 
-        hurt(prop, min, max, especial){
+         // Função de calculo do ataque 
+        hurt(prop, min, max, especial, source, target, cls) {
             const plus = especial ? 5 : 0
             const hurt = this.getRandom(min + plus, max + plus)
-            this.[prop] = Math.max(this.playerlife - hurt, 0)
+            this[prop] = Math.max(this[prop] - hurt, 0)
+            this.registerLog(`${source} atingiu ${target} com ${hurt}.`, cls)
         },
-        getRandom(min, max){
-            // Realizando ataque randomico de cada personagem
+        healAndHurt() {
+            this.heal(10, 15)
+            this.hurt('playerLife', 7, 12, false, 'Monstro', 'Jogador', 'monster')
+        },
+        heal(min, max) {
+            const heal = this.getRandom(min, max)
+            this.playerLife = Math.min(this.playerLife + heal, 100)
+            this.registerLog(`Jogador ganhou força de ${heal}.`, 'player')
+        },
+        getRandom(min, max) {
+              // Realizando ataque randomico de cada personagem
             const value = Math.random() * (max - min) + min
-            return Math.roud(value)
-
+            return Math.round(value)
+        },
+        registerLog(text, cls) {
+             // unshift() -> Significa que o log mais recente sempre ficara em primeiro
+            // assim ficnado do mais recente para o mais antigo 
+            this.logs.unshift({ text, cls })
         }
     },
-    watch:{
-        hasResult(value){
-            // Botao de iniciar novo jogo (ocultando outros botoes)
-            if(value) this.running = false
-        
+    watch: {
+        // Botao de iniciar novo jogo (ocultando outros botoes)
+        hasResult(value) {
+            if (value) this.running = false
         }
-            
-        
     }
-
 })

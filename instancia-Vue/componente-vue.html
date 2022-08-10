@@ -1,0 +1,43 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <!-- Referenciando um componente global dentro da View -->
+    <comp></comp>
+    <comp></comp>
+    <comp></comp>
+</div>
+
+<script>
+    // Usado pra referenciar um conmponente de forma global dentro do VUE
+    Vue.component('comp', {
+        template: `
+            <div>
+                <h1>{{ aula }}</h1>
+                <h2>{{ modulo }}</h2>
+                <button @click="alterarAula">Alterar Aula</button>
+                <button @click="alterarModulo">Alterar Módulo</button>
+            </div>
+        `,
+        // Ao inves de ter data apontando para um obj temos data apontando;
+        // direto pra uma função,que retorna um obj
+        data: function() {
+            return {
+                aula: 'Aula: Montando Instância Vue',
+                modulo: 'Módulo: Instância Vue'
+            }
+        },
+        methods: {
+            alterarAula() {
+                this.aula += '#'
+            },
+            alterarModulo() {
+                this.modulo += '#'
+            }
+        }
+    })
+    // a View diznedo que o componente agira em cima da <div id="app"></div>
+    const vm = new Vue({
+        el: '#app'
+    })
+</script>
