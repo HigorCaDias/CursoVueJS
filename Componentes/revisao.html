@@ -1,0 +1,33 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <CONTADOR></CONTADOR>
+    <Contador></Contador>
+    <contadoR></contadoR>
+</div>
+
+<script>
+    // Registro Global
+    Vue.component('contador', {
+        template: `
+            <div>
+                <span>{{ contador }}</span>
+                <button @click="contador++">+</button>
+                <button @click="contador--">-</button>
+            </div>
+        `,
+        data() {
+            return { 
+                contador: 0
+            }
+        }
+    })
+
+    new Vue({
+        // Quando o el está referenciando um ID em especifico passamos o # e quando
+        // estamos referenciando uma classe mudamos no <div> de id para class ficando <div class="app">
+        // e ao referenciar no el colocamos o ".app"
+        el: '#app',
+    })
+</script>
