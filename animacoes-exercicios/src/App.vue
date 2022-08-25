@@ -33,7 +33,8 @@
 		<hr>
 		<button @click="exibir2 = !exibir2">Alternar</button>
 		<transition
-			:css="false"
+			:css="false" - Cancelando o css dentro dessa div
+			pois ela é intermanete feita com JS
 			@before-enter="beforeEnter"
 			@enter="enter"
 			@after-enter="afterEnter"
@@ -109,6 +110,8 @@ export default {
 			this.larguraBase = 0
 			el.style.width = `${this.larguraBase}px`
 		},
+		// Quando a tag enter é chamada precisamos passar o parametro Done, pois o VUe
+		// Não sabe quando uma transição termina 
 		enter(el, done) {
 			this.animar(el, done, false)
 		},

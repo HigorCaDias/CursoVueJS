@@ -1,12 +1,29 @@
 <template>
     <div class="question">
-        
+        <span>{{question.text}}</span>
+        <ul class="answers"></ul>
+            <!-- Criando laço de repitição para as perguntas
+            o methodo key é utilizado como chave para rendenizar cada <li> dentro da <ul>  -->
+            <li v-for="(answer, i) in question.answers"
+                :key="answers.text"
+                @click="$emit('answered',answer.correct )">
+                <span class="number">{{ i + 1}} </span>
+                <span class="text"> {{answer.text}}</span>
+            </li>
     </div>
 </template>
 
 <script>
+import { stringify } from 'querystring';
+
 export default {
-    
+    props:{
+        question: {
+            type:Object,
+            required: true,
+        }
+        
+    }
 }
 </script>
 

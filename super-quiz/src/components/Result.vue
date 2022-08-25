@@ -1,12 +1,19 @@
 <template>
     <div class="result">
-        
+        <span v-if="result"> Resposta Certa! :)</span>
+        <span v-else="result"> Resposta Erradaa :(</span>
+        <button @click="$emit('confirmed')">Proxima Pergunta</button>
     </div>
 </template>
 
 <script>
 export default {
-    
+    props:{
+        result:{
+            type:Boolean,
+            required:true
+        }
+    }
 }
 </script>
 

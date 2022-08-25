@@ -1,12 +1,53 @@
 <template>
 	<div id="app">
 		<h1>Super Quiz</h1>
+		<transition name="flip">
+			<question v-if="questionMode"
+				:question="questions[currentQuestion]" 
+				@answered="showResult"/>
+				<result v-else
+				:result="result"
+				@confirmed="nextQuestion"/>
+		</transition>
 	</div>
 </template>
 
 <script>
-export default {
+import questions from './util/questions';
+import Question from './components/Question.vue';
+import Result from './components/Result.vue'
 
+export default {
+	// Registrando os componentes que serão utilizados
+	components: {questions, Result}, 
+	data(){
+		return{
+			result:false,
+			questionMode: true,
+			questions,
+			// Indice da questao selecionada
+			currentQuestion: 0
+		}
+	},
+	methods:{
+		showResult(result) {
+			this.result = result
+			this.questionMode = false
+		},
+		nextQuestion(){
+			// primeiro de calcula um valor aleatorio de 0 até p tamanho do array
+			let r = Math.random() * this.questions.length
+			// se converte para parseInt e atribuimos a currentQuestion
+			this.currentQuestion = parseInt(r)
+			// tambem mudamos para o question mode como verdadeiro
+			this.questionMode = true
+
+
+		}
+
+
+
+	}
 }
 </script>
 
