@@ -79,7 +79,7 @@ export default {
 			// caso o metodo id já exista então utiliza o patch(atualizar)
 			// Caso contrario utilize o post(criar)
 			const metodo = this.id ? 'patch' : 'post'
-			// mesmo exemplo acima mas com url
+			// mesmo exemplo acima mas com url"
 			const finalUrl = this.id ? `/${this.id}.json` : '.json'
 			this.$http[metodo](`/usuarios${finalUrl}`, this.usuario)
 				.then(_ => {
